@@ -1,0 +1,31 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block header %}
+<center>Game Detail</center>
+{% endblock header %}
+
+{% block content %}
+<div class="card">
+    <div class="row">
+        <div class="col-4">
+            {% if game.picture %}
+            <img src="{{game.picture.url}}" class="card-img-top" alt="...">
+            {% endif %}
+        </div>
+        <div class="col-8">
+            <div class="card-body">
+                <h1 class="card-title">{{ game.title }}</h1>
+                <p class="card-text">{{ game.description }}</p>
+                <p class="card-text">price: {{ game.price }}</p>
+                <p class="card-text">stock: {{ game.stock }}</p>
+                {% if game.specfile %}
+                <a href="{{game.specfile.url}}" class="btn btn-primary">Download Specfile</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

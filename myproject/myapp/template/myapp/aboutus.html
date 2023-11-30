@@ -1,0 +1,19 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block header %}
+<h>About Us</h1>
+{% endblock header %}
+
+{% block content %}
+<h1>CoC Phuket</h1><br>
+<h2>80 M.1 Kathu Kathu Phuket 83120</h2>
+
+<button onclick="myJS()">Alert</button>
+
+<!-- <link rel="javascript" href="{% static 'javascript/myJS.js' %}"> -->
+<script src="{% static 'javascript/myJS.js' %}">
+    document.onload = myJS();
+</script>
+{% endblock content %}
+

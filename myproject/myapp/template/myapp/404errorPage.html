@@ -1,0 +1,11 @@
+{% extends 'myapp/base.html' %}
+
+{% block header %}
+<h>404 Error</h1>
+{% endblock header %}
+
+{% block content %}
+<h2>Sorry, the page not found</h2>
+<p><a href="{% url 'home_page' %}" class="'btn-danger">Back to Homepage</a></p>
+
+{% endblock content %}

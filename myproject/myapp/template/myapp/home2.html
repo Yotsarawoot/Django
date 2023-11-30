@@ -1,0 +1,76 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block header %}
+
+<h1>CoC Gaming Shop</h1>
+
+{% endblock header %}
+
+{% block content %}
+
+{% for row in allrow %}
+
+<div class="row">
+    {% for game in row %}
+    <div class="col-4">
+        <div class="card" style="width: 18rem;">
+            {% if game.picture %}
+            <img src="{{game.picture.url}}" class="card-img-top" alt="...">
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <h1 class="card-title">{{ game.title }}</h1>
+            <!-- <p class="card-text">{{ game.description }}</p> -->
+            <p class="card-text">price: {{ game.price }}</p>
+            <p class="card-text">stock: {{ game.stock }}</p>
+            <a href="{% url 'gamedetail_page' 'ps4' game.id %}" class="btn btn-primary">Game Detail</a>
+            {% if game.specfile %}
+            <a href="{{game.specfile.url}}" class="btn btn-primary">Download Specfile</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endfor %}
+
+<ul class="pagination">
+
+    {% if allproduct.has_previous and allproduct.has_next != True %}
+    <li class="page-item"><a class="page-link" href="?page={{allproduct.previous_page_number}}">
+            < </a>
+    </li>
+    <li class="page-item"><a class="page-link"
+            href="?page={{allproduct.number|add:-1}}">{{allproduct.number|add:-1}}</a></li>
+    <li class="page-item active"><a class="page-link" href="?page={{allproduct.number}}">{{allproduct.number}}</a></li>
+    {% endif %}
+
+    {% if allproduct.has_previous and allproduct.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{allproduct.previous_page_number}}">
+            < </a>
+    </li>
+    <li class="page-item"><a class="page-link"
+            href="?page={{allproduct.number|add:-1}}">{{allproduct.number|add:-1}}</a></li>
+    <li class="page-item active"><a class="page-link" href="?page={{allproduct.number}}">{{allproduct.number}}</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{allproduct.number|add:1}}">{{allproduct.number|add:1}}</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="?page={{allproduct.next_page_number}}"> > </a></li>
+    {% endif %}
+
+    {% if allproduct.has_next and allproduct.has_previous != True %}
+    <li class="page-item active"><a class="page-link" href="?page={{allproduct.number}}">{{allproduct.number}}</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{allproduct.number|add:1}}">{{allproduct.number|add:1}}</a>
+    </li>
+    {% if allproduct.num_pages > 2 %}
+    <li class="page-item"><a class="page-link" href="?page={{allproduct.number|add:2}}">{{allproduct.number|add:2}}</a>
+    </li>
+    {% endif %}
+    <li class="page-item"><a class="page-link" href="?page={{allproduct.next_page_number}}"> > </a></li>
+    {% endif %}
+
+</ul>
+<p> page {{allproduct.number}} from {{allproduct.paginator.num_pages}}
+<p></p>
+
+{% endblock content %}
